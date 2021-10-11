@@ -1,9 +1,10 @@
 import React from 'react';
-import {data} from '../data';
+// import {data} from '../data';
 import Navbar from './Navbar';
 import MovieCard from './MovieCard';
  
-function App() {
+function App(props) {
+  const movies = props.store.getState();
   return (
     <div className="App">
       <Navbar />

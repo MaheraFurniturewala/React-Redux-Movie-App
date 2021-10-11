@@ -12,7 +12,8 @@ const store = createStore(movies);
 console.log('store', store);
 console.log('beforestore.getState', store.getState());
 
-//dispatch will pass action to reducer(movies)
+//dispatch function is used to send actions to reducer
+//dispatch will pass action object to reducer(movies) and store ultimately
 store.dispatch({
   type: 'ADD_MOVIES',
   movies:[{name:'superman'}]
@@ -20,9 +21,10 @@ store.dispatch({
 
 console.log('afterstore.getState', store.getState());
 
+//pass movies as props from the store
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App store={store} />
   </React.StrictMode>,
   document.getElementById('root')
 );

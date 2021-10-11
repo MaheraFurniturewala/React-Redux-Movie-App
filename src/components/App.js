@@ -1,27 +1,46 @@
 import React from 'react';
-// import {data} from '../data';
+import {data} from '../data';
 import Navbar from './Navbar';
 import MovieCard from './MovieCard';
  
-function App(props) {
-  const movies = props.store.getState();
-  return (
-    <div className="App">
-      <Navbar />
-      <div className="main">
-        <div className="tabs">
-          <div className="tab">Movies</div>
-          <div className="tab">Favourites</div>
-        </div>
+class App extends React.Component {
+  componentDidMount() {
+    const { store } = this.props;
+    //whenever we dispatch an acton(state change) subscribe is called
+    store.subscribe(() => {
+      this.forceUpdate();
+    })
+    // make api call to get movies
+    // dispatch an action to add movies to store
+      store.dispatch({
+      type: 'ADD_MOVIES',
+      movies: data
+    });
 
-        <div className="list">
-          {data.map((movie,index) => {
-          return <MovieCard movie={movie} key={`movies-${index}`} />
-          })}
+
+
+  }
+  
+  render() {
+    const movies = this.props.store.getState();
+    return (
+      <div className="App">
+        <Navbar />
+        <div className="main">
+          <div className="tabs">
+            <div className="tab">Movies</div>
+            <div className="tab">Favourites</div>
+          </div>
+  
+          <div className="list">
+            {movies.map((movie,index) => {
+            return <MovieCard movie={movie} key={`movies-${index}`} />
+            })}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

@@ -10,13 +10,25 @@ class App extends React.Component {
     //whenever we dispatch an acton(state change) subscribe is called(listener)
     store.subscribe(() => {
       this.forceUpdate();
+      
     })
     // make api call to get movies
     // dispatch an action to add movies to store
       store.dispatch(addMovies(data));
   }
-  
+
+  isMovieFavourite = (movie) => {
+    const { favourites } = this.props.store.getState();
+    const index = favourites.indexOf(movie);
+    if(index !== -1){
+      //movie is favourite
+      return true;
+    }
+    return false;
+  }
+
   render() {
+    console.log(this.props.store.getState());
     const { list } = this.props.store.getState();
     return (
       <div className="App">
@@ -29,7 +41,11 @@ class App extends React.Component {
   
           <div className="list">
             {list.map((movie,index) => {
-            return <MovieCard movie={movie} key={`movies-${index}`} />
+            return <MovieCard 
+            movie={movie} 
+            key={`movies-${index}`} 
+            dispatch={this.props.store.dispatch}  
+            isFavourite={this.isMovieFavourite(movie)}/>
             })}
           </div>
         </div>

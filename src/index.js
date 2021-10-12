@@ -14,12 +14,11 @@ console.log('beforestore.getState', store.getState());
 
 //dispatch function is used to send actions to reducer
 //dispatch will pass action object to reducer(movies) and store ultimately
-store.dispatch({
-  type: 'ADD_MOVIES',
-  movies:[{name:'superman'}]
-})
+// store.dispatch({
+//   type: 'ADD_MOVIES',
+//   movies:[{name:'superman'}]
+// })
 
-console.log('afterstore.getState', store.getState());
 
 //pass movies as props from the store
 ReactDOM.render(

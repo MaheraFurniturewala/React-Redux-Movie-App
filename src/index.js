@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 
-
 import './index.css';
 import App from './components/App';
-import movies from './reducers';
+import rootReducer from './reducers';
 
 //pass the reducer in the args
-const store = createStore(movies);
+const store = createStore(rootReducer);
 console.log('store', store);
 console.log('beforestore.getState', store.getState());
 
@@ -19,10 +18,9 @@ console.log('beforestore.getState', store.getState());
 //   movies:[{name:'superman'}]
 // })
 
-
 //pass movies as props from the store
 ReactDOM.render(
-  <React.StrictMode>
+  <React.StrictMode> 
     <App store={store} />
   </React.StrictMode>,
   document.getElementById('root')
